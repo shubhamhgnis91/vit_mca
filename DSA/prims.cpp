@@ -1,90 +1,64 @@
-#include<iostream>
+#include <iostream>
+#include <climits>
+#define max 5
 using namespace std;
 
-const int V=5;
-// Function to find the vertex with minimum key value 
-int min_Key(int key[], bool visited[])  
-{ 
-    int min = 999, min_index;  // 999 represents an Infinite value
+int minDistance(int distance[], bool visited[], int n)
+{
+    int min = INT_MAX, min_index;
+    for (int v = 0; v < n; v++)
+        if (visited[v] == false && distance[v] <= min)
+            min = distance[v], min_index = v;
+    return min_index;
+}
 
-    for (int v = 0; v < V; v++) { 
-        if (visited[v] == false && key[v] < min) { 
-        	// vertex should not be visited
-            min = key[v];
-			min_index = v;  
-        }
-    }    
-    return min_index;  
-}  
+void prims(int a[][max], int n, int s)
+{
+    int distance[n], parent[n];
+    bool visited[n];
 
-// Function to print the final MST stored in parent[]  
-int print_MST(int parent[], int cost[V][V])  
-{  
-    int minCost=0;
-	cout<<"Edge \tWeight\n";  
-    for (int i = 1; i< V; i++) {
-		cout<<parent[i]<<" - "<<i<<" \t"<<cost[i][parent[i]]<<" \n";  
-		minCost+=cost[i][parent[i]];
-    }
-	cout<<"Total cost is: "<<minCost;
-}  
-
-// Function to find the MST using adjacency cost matrix representation  
-void find_MST(int cost[V][V])  
-{  
-    int parent[V], key[V];
-    bool visited[V];
-
-    // Initialize all the arrays 
-    for (int i = 0; i< V; i++) { 
-        key[i] = 999;    // 99 represents an Infinite value
-        visited[i] = false;
-        parent[i]=-1;
-    }    
-
-    key[0] = 0;  // Include first vertex in MST by setting its key vaue to 0.  
-    parent[0] = -1; // First node is always root of MST  
-
-    // The MST will have maximum V-1 vertices  
-    for (int x = 0; x < V - 1; x++) 
-    {  
-        // Finding the minimum key vertex from the 
-        //set of vertices not yet included in MST  
-        int u = min_Key(key, visited);  
-
-        visited[u] = true;  // Add the minimum key vertex to the MST  
-
-        // Update key and parent arrays
-        for (int v = 0; v < V; v++)  
-        {
-            // cost[u][v] is non zero only for adjacent vertices of u  
-            // visited[v] is false for vertices not yet included in MST  
-            // key[] gets updated only if cost[u][v] is smaller than key[v]  
-            if (cost[u][v]!=0 && visited[v] == false && cost[u][v] < key[v])
-            {  
-                parent[v] = u;
-                key[v] = cost[u][v];  
-            }        
-        }
-    }
-
-    // print the final MST  
-	print_MST(parent, cost);  
-}  
-
-// main function
-int main()  
-{  
-    int cost[V][V];
-	cout<<"Enter the vertices for a graph with 6 vetices: \n";
-    for (int i=0;i<V;i++)
+    for(int i=0;i<n;i++)
     {
-        for(int j=0;j<V;j++)
+        distance[i]=INT_MAX;
+        visited[i]=false;
+        parent[i]=-1;
+    }
+
+    distance[s]=0;
+    for(int count=0; count<n-1; count++)
+    {
+        int u = minDistance(distance, visited, n);
+        visited[u] = true;
+
+        for(int v=0; v<n; v++)
         {
-			cin>>cost[i][j];
+            if (!visited[v] && a[u][v] && distance[u] != INT_MAX && a[u][v] < distance[v])
+            {
+                distance[v] = a[u][v];
+                parent[v] = u;
+            }
         }
     }
-	find_MST(cost);  
 
-    return 0;  
-}  
+    int minCost=0;
+    cout<<"Edge \tWeight\n";  
+    for (int i = 1; i< n; i++) {
+        cout<<parent[i]<<" - "<<i<<" \t"<<distance[i]<<" \n";  
+        minCost+=distance[i];
+    }
+    cout<<"Total cost is: "<<minCost;
+}
+
+int main()
+{
+    int A[][max] ={     { 0, 2, 0, 6, 0 },
+                        { 2, 0, 3, 8, 5 },
+                        { 0, 3, 0, 0, 7 },
+                        { 6, 8, 0, 0, 9 },
+                        { 0, 5, 7, 9, 0 },
+                    };
+    int s,t;
+    
+    prims(A, max, 0);
+    return 0;
+}
