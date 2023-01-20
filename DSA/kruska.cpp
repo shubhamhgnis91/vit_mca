@@ -31,7 +31,7 @@ void kruskalMST(int cost[][V])
         int min = INT_MAX, a = -1, b = -1;
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
-                if (find(i) != find(j) && cost[i][j] < min) {
+                if (find(i) != find(j) && cost[i][j] > 0 && cost[i][j] < min) {
                     min = cost[i][j];
                     a = i;
                     b = j;
@@ -50,14 +50,13 @@ void kruskalMST(int cost[][V])
 int main()
 {
     int cost[][V] = {
-        { INT_MAX, 2, INT_MAX, 6, INT_MAX },
-        { 2, INT_MAX, 3, 8, 5 },
-        { INT_MAX, 3, INT_MAX, INT_MAX, 7 },
-        { 6, 8, INT_MAX, INT_MAX, 9 },
-        { INT_MAX, 5, 7, 9, INT_MAX },
+        { 0, 2, 0, 6, 0 },
+        { 2, 0, 3, 8, 5 },
+        { 0, 3, 0, 0, 7 },
+        { 6, 8, 0, 0, 9 },
+        { 0, 5, 7, 9, 0 },
     };
  
-    
     kruskalMST(cost);
  
     return 0;
