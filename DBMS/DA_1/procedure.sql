@@ -17,3 +17,21 @@ BEGIN
    dbms_output.put_line(' Minimum of (23, 45) : ' || c); 
 END; 
 /
+
+
+
+CREATE PROCEDURE add_product (
+p_code IN Product.Pcode%TYPE,
+p_name IN Product.Pname%TYPE,
+p_price IN Product.Price%TYPE,
+p_mfg_date IN Product.MFG_Date%TYPE
+)
+AS
+BEGIN
+INSERT INTO Product VALUES (p_code, p_name, p_price, p_mfg_date);
+END;
+/
+
+
+execute add_product('P101', 'Samsung Galaxy S500', 35000, '20-feb-2022');
+
