@@ -17,7 +17,7 @@ else :
     else:
         nBdays=0
         
-        for i in range(year,cYear+1,4):
+        for i in range(year+1,cYear+1,4):
             if (i%4==0 and i%100!=0) or i%400==0:
                 nBdays=nBdays + 1
         
