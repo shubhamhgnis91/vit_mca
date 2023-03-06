@@ -12,4 +12,6 @@ while m2>=m1:
     m1=m1+y
     c=c+1
 
+c=c+n
+
 print("Total number of pebbles required: "+c)
