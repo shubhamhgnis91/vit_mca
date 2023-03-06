@@ -14,4 +14,4 @@ while m2>=m1:
 
 c=c+n
 
-print("Total number of pebbles required: "+c)
+print("Total number of pebbles required: "+str(c))
