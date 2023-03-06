@@ -1,4 +1,3 @@
-
 print("Enter total number of nuts and bolts: ")
 total=int(input())
 
@@ -11,11 +10,16 @@ x=int(input())
 print("Enter percentage of defective bolts: ")
 y=int(input())
 
-bolts=total-nuts
+if total <= 0 or nuts <= 0 or x <= 0 or y <= 0:
+    print("Error: All inputs should be greater than 0.")
 
-ndNuts=total-((x/100)*nuts)
-ndBolts=total-((y/100)*bolts)
+else:
+    
+    bolts=total-nuts
 
-ndPerc=((ndNuts+ndBolts)/total)*100 - 100
+    ndNuts=total-((x/100)*nuts)
+    ndBolts=total-((y/100)*bolts)
 
-print("Percentage of non defective items in the bag: {:.2f}".format(ndPerc))
+    ndPerc=((ndNuts+ndBolts)/total)*100 - 100
+
+    print("Percentage of non defective items in the bag: {:.2f}".format(ndPerc))
