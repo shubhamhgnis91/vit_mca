@@ -6,6 +6,6 @@ hInches = float(input("Enter height in inches: "))
 wKilos =  wPounds* 0.4536
 hMetres = (hInches * 2.54) / 100
 
-bmi = round(wPounds / math.pow(hInches, 2), 2)
+bmi = round(wPounds / math.pow(hMetres, 2), 2)
 
 print("BMI: " + str(bmi))
