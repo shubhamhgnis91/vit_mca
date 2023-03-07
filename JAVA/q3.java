@@ -73,7 +73,9 @@ class Consumer{
 }
 
 public class q3 {
-    Consumer c1=new Consumer(1001, "Shubham", 100, 500, true);
-    double b=c1.billAmount()
-    System.out.println(b);
+    public static void main(String[] args) {
+        Consumer c1=new Consumer(1001, "Shubham", 100, 500, true);
+        double b=c1.billAmount();
+        System.out.println(b);   
+    }
 }
