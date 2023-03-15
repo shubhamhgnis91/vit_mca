@@ -1,4 +1,4 @@
-m = 4
+m = 10
 n = 3
 
 a = []
@@ -7,12 +7,22 @@ b= ["facilities","academics","infrastructure"]
 for i in range(m):
     row =[]
     for j in range(n):
-        row.append(int(input('Score for ' + str(b[j]) + ' for college ' + str(i+1) + ': ')))
+        while True:
+            score = input('Score for ' + str(b[j]) + ' for college ' + str(i+1) + ': ')
+            try:
+                score = float(score)
+                if score < 0 or score > 25 and j == 0 or score > 50 and j == 1 or score > 25 and j == 2:
+                    print('Invalid score! Enter a score between 0 and 25 for facilities, between 0 and 50 for academics, and between 0 and 25 for infrastructure.')
+                else:
+                    row.append(score)
+                    break
+            except ValueError:
+                print('Invalid input! Enter a valid score.')
     a.append(row)
 
 
 score = []
-temp1=score
+score_copy=score
 
 
 for i in range(m):
@@ -30,5 +40,4 @@ for i in range(m):
 
 
 for i in range(m):
-    print('Rank '+ str(i+1) + ' is college ' + str(temp1.index(score[i])+1) + ' with score: ' + str(score[i]))
-
+    print('Rank '+ str(i+1) + ' is college ' + str(score_copy.index(score[i])+1) + ' with score: ' + str(score[i]))
